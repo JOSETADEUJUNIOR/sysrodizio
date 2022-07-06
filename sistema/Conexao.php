@@ -3,7 +3,7 @@
 // Configurações do Site
 define('HOST', 'localhost'); //IP
 define('USER', 'root'); //usuario
-define('PASS', null); //senha
+define('PASS', 'ac9711'); //senha
 define('DB', 'sysrodizio'); //banco
 
 /**
