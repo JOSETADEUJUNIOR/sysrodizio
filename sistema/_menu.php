@@ -5,20 +5,12 @@
                 <img src="assets/img/find_user.png" class="user-image img-responsive" />
             </li>
             <li>
-                <a href="colaborador.php"><i class="fa fa-user fa-3x"></i> Colaborador</a>
+                <a href="index.php"><i class="fa fa-user fa-3x"></i> Gerar Rodízio</a>
             </li>
             <li>
-                <a href="listarColaborador.php"><i class="fa fa-users fa-3x"></i> Listar Colaboradores</a>
+                <a href="cad_irmas.php"><i class="fa fa-users fa-3x"></i> Cadastro de Irmãs</a>
             </li>
-            <li>
-                <a href="cargo.php"><i class="fa fa-list fa-3x"></i> Cargos</a>
-            </li>
-            <li>
-                <a href="listarCargo.php"><i class="fa fa-list fa-3x"></i> Listar Cargos</a>
-            </li>
-            <li>
-                <a href="relatorio.php" target="_blank"><i class="fa fa-doc fa-3x"></i> Relatório</a>
-            </li>
+            
         </ul>
 
     </div>

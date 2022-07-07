@@ -2,6 +2,7 @@
 require_once 'RodizioDAO.php';
 $dao = new RodizioDAO();
 
+
 if (isset($_GET['cod'])) {
     $IrmID = $_GET['cod'];
     $dados = $dao->DetalhaIrma($IrmID);
@@ -12,9 +13,9 @@ if (isset($_POST['btnSalvar'])) {
     $IrmID = trim($_POST['IrmID']);
     $IrmaNome = trim($_POST['IrmNome']);
     $ret = $dao->CadastrarIrma($IrmID, $IrmaNome);
-    var_dump($ret);
+    
 }
-
+$irmas = $dao->RetornaIrmas();
 
 ?>
 <?php include_once('_head.php'); ?>

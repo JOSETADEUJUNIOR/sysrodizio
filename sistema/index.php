@@ -1,17 +1,15 @@
 <?php
 require_once 'RodizioDAO.php';
 $dao = new RodizioDAO();
-$m = getCOD(addslashes(preg_replace("/[^0-9]/", "", ($_POST['mes'] ?? 0))));; # Mes que deseja gerar o Rodízio
-$IDUltimaIrma = getCOD(addslashes(preg_replace("/[^0-9]/", "", ($_POST['UltimoID'] ?? 0)))); # ID da ultima irmã que tocou no mes passado
+$m = getCOD(addslashes(preg_replace("/[^0-9]/", "", ($_POST['mes'] ?? date('m')))));; # Mes que deseja gerar o Rodízio
+$IDUltimaIrma = $_POST['UltimoID']; # ID da ultima irmã que tocou no mes passado
 
 $irmas = $dao->RetornaIrmas();
-var_dump($irmas);
 
-$arraIrmas = 
+$arrIrmas[] = 0;
+foreach ($irmas as $irm) {
 
-for ($i=0; $i<count($irmas); $i++ ) {
-
-    $arrIrmas[] = $irmas[$i]['IrmID'].'-'.$irmas[$i]['IrmNome'];
+    $arrIrmas[] = $irm['IrmID'] . '-' . $irm['IrmNome'];
 }
 
 $arrDiasSemana = array(
@@ -52,38 +50,7 @@ function getCOD($cod)
 {
     return str_pad($cod, 2, "0", STR_PAD_LEFT);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
-
-
 <?php include_once('_head.php'); ?>
 
 <body>
@@ -102,13 +69,13 @@ function getCOD($cod)
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Digite o Mês</label>
-                                    <input name="mes" id="mes" type="text" placeholder="Digite o Mês" value="<?= $dados[0]['IrmNome'] ?>" class="form-control">
+                                    <input name="mes" id="mes" type="text" placeholder="Digite o Mês" value="<?= ($m>0? $m:'')?>" class="form-control">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Informar Ultimo ID de Irma</label>
-                                    <input name="UltimoID" id="UltimoID" type="text" placeholder="Ultimo ID" value="<?= $dados[0]['IrmNome'] ?>" class="form-control">
+                                    <input name="UltimoID" id="UltimoID" type="text" placeholder="Ultimo ID" value="<?= $IDUltimaIrma?>" class="form-control">
                                 </div>
                             </div>
 
@@ -141,9 +108,7 @@ function getCOD($cod)
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php
-
-                                        function percorreMes($m, $ultimaIrma = 0)
+                                        <?php function percorreMes($m, $ultimaIrma = 0)
                                         {
                                             global $arrIrmas, $arrDiasSemana;
                                             if ($m >= 0 && $m <= 12) { # Mês precisa ser válido
@@ -152,12 +117,7 @@ function getCOD($cod)
                                                 for ($i = $diaIni; $i <= $diaFim; $i++) { # Percorrendo os dias do Mês selecionado
                                                     $n = date("N", strtotime(date("Y-$m-" . getCOD($i)))); # Dia da semana
                                                     if (checkDiaDeCulto($n)) { # Confirma se o dia tem culto
-                                                        $ultimaIrma = getProximaIrma($ultimaIrma);
-
-
-                                        ?>
-
-
+                                                        $ultimaIrma = getProximaIrma($ultimaIrma);?>
                                                         <tr class="default">
                                                             <td><?= getCOD($i) . "/$m/" . date("Y") ?></td>
                                                             <td><?= $arrDiasSemana[$n] ?></td>
@@ -179,13 +139,6 @@ function getCOD($cod)
                     </div>
                     <!--  end  Context Classes  -->
                 </div>
-
-
-
-
-
-
-
             </div>
             <!-- /. PAGE INNER  -->
         </div>
